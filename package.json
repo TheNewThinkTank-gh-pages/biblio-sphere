@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/TheNewThinkTank/biblio-sphere#readme",
   "dependencies": {
-    "googleapis": "^152.0.0",
+    "googleapis": "^154.1.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
