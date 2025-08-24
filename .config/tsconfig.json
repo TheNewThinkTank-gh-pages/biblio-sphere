@@ -1,14 +1,14 @@
 {
 	"compilerOptions": {
-	  "target": "ES6",
-	  "lib": ["ES6", "DOM"],
-	  "module": "ESNext",
-	  "outDir": "./dist",
-	  "rootDir": "./src",
-	  "strict": true,
-	  "esModuleInterop": true,
-	  "skipLibCheck": true
+	  "target": "ES2022", // Target modern JavaScript features
+	  "lib": ["ES2022", "DOM"], // Include type definitions for ES2022 and DOM
+	  "module": "ESNext", // Use ES modules
+	  "outDir": "./dist", // Output compiled files to "dist"
+	  "rootDir": "./src", // Source files are in "src"
+	  "strict": true, // Enable strict type-checking
+	  "esModuleInterop": true, // Allow interoperability with CommonJS modules
+	  "skipLibCheck": true // Skip type-checking for declaration files in node_modules
 	},
-	"include": ["src/**/*.ts", "test/**/*.ts"],
-	"exclude": ["node_modules", "dist"]
+	"include": ["src/**/*.ts", "test/**/*.ts"], // Include all .ts files in "src" and "test"
+	"exclude": ["node_modules", "dist"] // Exclude "node_modules" and "dist"
 }

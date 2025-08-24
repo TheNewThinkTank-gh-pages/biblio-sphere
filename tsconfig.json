@@ -1,5 +1,1 @@
-{
-    "compilerOptions": {
-        "strict": true
-    },
-}
+.config/tsconfig.json
