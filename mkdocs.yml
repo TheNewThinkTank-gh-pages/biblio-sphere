@@ -29,7 +29,7 @@ theme:
 extra:
   social:
     - icon: fontawesome/brands/github-alt
-      link: https://github.com/TheNewThinkTank/biblio-sphere
+      link: https://github.com/TheNewThinkTank-gh-pages/biblio-sphere
 
 plugins:
   - search
