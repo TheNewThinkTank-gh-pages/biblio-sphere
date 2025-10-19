@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node --max-old-space-size=4096 ./node_modules/.bin/jest --config .config/jest.config.js",
     "build": "tsc --project .config/tsconfig.json",
-    "lint": "eslint src/ --config .config/eslint.config.mjs"
+    "lint": "eslint src/ --config .config/eslint.config.mjs",
+    "demo": "ts-node --project .config/tsconfig.json src/bin/demo.ts"
   },
   "repository": {
     "type": "git",

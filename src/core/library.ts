@@ -41,6 +41,16 @@ export function getDeweyCategory(subject: string): string {
 export class Library {
     private books: Book[] = [];
 
+    constructor(initialBooks?: Book[]) {
+        if (initialBooks && initialBooks.length) {
+            initialBooks.forEach(b => {
+                // ensure Dewey is assigned
+                b.deweyDecimal = getDeweyCategory(b.subject ?? '');
+                this.books.push(b);
+            });
+        }
+    }
+
     // Add a book to the library and assign its Dewey Decimal category
     addBook(book: Book): void {
         book.deweyDecimal = getDeweyCategory(book.subject ?? '');
@@ -95,15 +105,22 @@ export class Library {
         return this.books.filter(book => book.deweyDecimal === dewey);
     }
 
+    private static compareValues(a: unknown, b: unknown): number {
+        const va = a ?? '';
+        const vb = b ?? '';
+        if (typeof va === 'number' && typeof vb === 'number') {
+            return va - vb;
+        }
+        const sa = String(va).toLowerCase();
+        const sb = String(vb).toLowerCase();
+        if (sa > sb) return 1;
+        if (sa < sb) return -1;
+        return 0;
+    }
+
     // Sort books by a specified field (e.g., 'author', 'year', 'title')
     sortBooksBy(field: keyof Book): void {
-        this.books.sort((a, b) => {
-            const valueA = a[field] ?? ''; // Fallback to an empty string if undefined
-            const valueB = b[field] ?? ''; // Fallback to an empty string if undefined
-            if (valueA > valueB) return 1;
-            if (valueA < valueB) return -1;
-            return 0; // They are equal
-        });
+        this.books.sort((a, b) => Library.compareValues(a[field], b[field]));
     }
 
     // Search for books by a specific author
@@ -133,60 +150,4 @@ export class Library {
             book.isbn === isbn
         );
     }
-}
-
-// Example usage
-const myLibrary = new Library();
-
-// Simulate adding some books to the library
-myLibrary.addBook({
-    title: "The Great Gatsby",
-    author: "F. Scott Fitzgerald",
-    year: 1925,
-    isbn: "978-0743273565",
-    subject: "literature"
-});
-
-myLibrary.addBook({
-    title: "1984",
-    author: "George Orwell",
-    year: 1949,
-    isbn: "978-0451524935",
-    subject: "politics"
-});
-
-myLibrary.addBook({
-    title: "Meditations",
-    author: "Marcus Aurelius",
-    year: 180,
-    isbn: "978-0140449334",
-    subject: "philosophy"
-});
-
-// Print the entire catalog
-console.log("\nFull Catalog:");
-myLibrary.printBooks();
-
-// Search for books by a specific author
-console.log("\nBooks by George Orwell:");
-const booksByOrwell = myLibrary.searchByAuthor("George Orwell");
-booksByOrwell.forEach(book => console.log(`${book.title} (${book.year})`));
-
-// Search for books by a specific title
-console.log("\nBooks with 'Great' in the title:");
-const booksWithTitleGreat = myLibrary.searchByTitle("Great");
-booksWithTitleGreat.forEach(book => console.log(`${book.title} (${book.year})`));
-
-// Search for books by a specific subject
-console.log("\nBooks on Philosophy:");
-const booksOnPhilosophy = myLibrary.searchBySubject("philosophy");
-booksOnPhilosophy.forEach(book => console.log(`${book.title} (${book.year})`));
-
-// Search for books by a specific ISBN
-console.log("\nBook with ISBN 978-0451524935:");
-const bookByISBN = myLibrary.searchByISBN("978-0451524935");
-if (bookByISBN.length > 0) {
-    console.log(`${bookByISBN[0].title} (${bookByISBN[0].year})`);
-} else {
-    console.log("No book found with that ISBN.");
 }

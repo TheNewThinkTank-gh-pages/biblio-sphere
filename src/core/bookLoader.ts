@@ -1,7 +1,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { Book } from './library';
+import type { Book } from '../models/book';
 
 export function loadBooksFromDirectory(directory: string): Book[] {
 	const absoluteDirectory = path.resolve(__dirname, directory);
