@@ -1,5 +1,6 @@
 
-import { Library, Book, getDeweyCategory } from '../src/core/library';
+import type { Book } from '../src/models/book';
+import { Library, getDeweyCategory } from '../src/core/library';
 
 describe('Library', () => {
     let library: Library;
