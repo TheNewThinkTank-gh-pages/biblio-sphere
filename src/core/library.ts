@@ -1,16 +1,7 @@
 
 // import { loadBooksFromDirectory } from './bookLoader';
-import { loadBooksFromGoogleDrive } from './googleDriveLoader';
-
-export interface Book {
-    title: string;
-    author: string;
-    year: number;
-    isbn: string;
-    subject: string;
-    deweyDecimal?: string;
-    removalFlag?: boolean;  // Indicates if the book is up for removal
-}
+import { loadBooksFromGoogleDrive } from '../integrations/googleDrive/googleDriveLoader';
+import type { Book } from '../models/book';
 
 const deweyCategories: { [key: string]: string } = {
     "000": "Generalities",
@@ -52,7 +43,7 @@ export class Library {
 
     // Add a book to the library and assign its Dewey Decimal category
     addBook(book: Book): void {
-        book.deweyDecimal = getDeweyCategory(book.subject);
+        book.deweyDecimal = getDeweyCategory(book.subject ?? '');
         this.books.push(book);
     }
 
@@ -118,21 +109,21 @@ export class Library {
     // Search for books by a specific author
     searchByAuthor(author: string): Book[] {
         return this.books.filter(book => 
-            book.author.toLowerCase().includes(author.toLowerCase())
+            (book.author ?? '').toLowerCase().includes(author.toLowerCase())
         );
     }
 
     // Search for books by a specific title
     searchByTitle(title: string): Book[] {
         return this.books.filter(book => 
-            book.title.toLowerCase().includes(title.toLowerCase())
+            (book.title ?? '').toLowerCase().includes(title.toLowerCase())
         );
     }
 
     // Search for books by a specific subject
     searchBySubject(subject: string): Book[] {
         return this.books.filter(book => 
-            book.subject.toLowerCase().includes(subject.toLowerCase())
+            (book.subject ?? '').toLowerCase().includes(subject.toLowerCase())
         );
     }
 

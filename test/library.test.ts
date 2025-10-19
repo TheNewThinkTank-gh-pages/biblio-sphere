@@ -1,5 +1,5 @@
 
-import { Library, Book, getDeweyCategory } from '../src/library';
+import { Library, Book, getDeweyCategory } from '../src/core/library';
 
 describe('Library', () => {
     let library: Library;

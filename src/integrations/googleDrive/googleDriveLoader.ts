@@ -1,6 +1,6 @@
 
 import { google } from 'googleapis';
-import { Book } from './library';
+import { Book } from './core/library';
 import { authorize, downloadFile } from './googleDriveUtils';
 
 async function loadBooksFromGoogleDrive(): Promise<Book[]> {
