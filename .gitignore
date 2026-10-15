@@ -13,5 +13,9 @@ local_assets/
 
 node_modules
 dist/
+release/
+playwright-report/
+test-results/
+.gstack/
 src/**/*.js
 src/**/*.js.map

@@ -18,13 +18,25 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: "23"
+          node-version: "24"
 
       - name: npm ci
         run: npm ci
 
       - name: Run tests with coverage
         run: npx jest --coverage --config .config/jest.config.js  # npm test
+
+      - name: Lint desktop app
+        run: npm run lint:desktop
+
+      - name: Build desktop app
+        run: npm run build:desktop
+
+      - name: Install desktop test browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Test desktop workflows
+        run: npm run test:desktop
 
       # - name: Run tests with coverage
       #   run: |

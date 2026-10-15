@@ -177,6 +177,8 @@ describe('getDeweyCategory', () => {
         expect(getDeweyCategory('religion')).toBe('200');
         expect(getDeweyCategory('economics')).toBe('300');
         expect(getDeweyCategory('politics')).toBe('300');
+        expect(getDeweyCategory('language')).toBe('400');
+        expect(getDeweyCategory('linguistics')).toBe('400');
         expect(getDeweyCategory('science')).toBe('500');
         expect(getDeweyCategory('technology')).toBe('600');
         expect(getDeweyCategory('art')).toBe('700');
